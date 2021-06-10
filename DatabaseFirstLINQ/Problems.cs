@@ -31,8 +31,8 @@ namespace DatabaseFirstLINQ
             Console.WriteLine("_______________________");
             ProblemEight();
             Console.WriteLine("_______________________");
-            //ProblemNine();
-            //Console.WriteLine("_______________________");
+            ProblemNine();
+            Console.WriteLine("_______________________");
             //ProblemTen();
             //Console.WriteLine("_______________________");
             //ProblemEleven();
@@ -162,6 +162,9 @@ namespace DatabaseFirstLINQ
             // HINT: End of query will be: .Select(sc => sc.Product.Price).Sum();
             // Then print the total of the shopping cart to the console.
 
+            var cart = _context.ShoppingCarts.Include(c => c.Product).Include(c => c.User).Where(c => c.User.Email == "oda@gmail.com").Select(sc => sc.Product.Price).Sum();
+            // Solution works if user has single item. Used instructions above
+            Console.WriteLine(cart);
         }
 
         private void ProblemTen()
