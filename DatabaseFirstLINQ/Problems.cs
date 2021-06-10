@@ -35,10 +35,10 @@ namespace DatabaseFirstLINQ
             Console.WriteLine("_______________________");
             ProblemTen();
             Console.WriteLine("_______________________");
-            //ProblemEleven();
-            //Console.WriteLine("_______________________");
-            //ProblemTwelve();
-            //Console.WriteLine("_______________________");
+            ProblemEleven();
+            Console.WriteLine("_______________________");
+            ProblemTwelve();
+            Console.WriteLine("_______________________");
             //ProblemThirteen();
             //Console.WriteLine("_______________________");
             //ProblemFourteen();
@@ -207,7 +207,14 @@ namespace DatabaseFirstLINQ
         private void ProblemTwelve()
         {
             // Create a new Product object and add that product to the Products table using LINQ.
-
+            Product newProduct = new Product()
+            {
+                Name = "Razor Blade Stealth Advanced",
+                Description = "High performance gaming laptop",
+                Price = 2800
+            };
+            _context.Products.Add(newProduct);
+            _context.SaveChanges();
         }
 
         private void ProblemThirteen()
