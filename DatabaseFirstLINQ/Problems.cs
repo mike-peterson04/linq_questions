@@ -23,8 +23,8 @@ namespace DatabaseFirstLINQ
             Console.WriteLine("_______________________");
             ProblemFour();
             Console.WriteLine("_______________________");
-            //ProblemFive();
-            //Console.WriteLine("_______________________");
+            ProblemFive();
+            Console.WriteLine("_______________________");
             //ProblemSix();
             //Console.WriteLine("_______________________");
             //ProblemSeven();
@@ -106,6 +106,11 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that gets all of the users who registered BEFORE 2016
             // Then print each user's email and registration date to the console.
+            var legacyUsers = _context.Users.Where(s => s.RegistrationDate < new DateTime(2016,1,1));
+            foreach (var user in legacyUsers)
+            {
+                Console.WriteLine(user.Email+" and "+user.RegistrationDate);
+            }
 
         }
 
