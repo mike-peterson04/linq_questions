@@ -15,26 +15,46 @@ namespace DatabaseFirstLINQ
         }
         public void RunLINQQueries()
         {
-            Console.WriteLine(ProblemOne() + " problem one"); 
-            //ProblemTwo();
-            //ProblemThree();
+            Console.WriteLine(ProblemOne() + " problem one");
+            Console.WriteLine("_______________________");
+            ProblemTwo();
+            Console.WriteLine("_______________________");
+            ProblemThree();
+            Console.WriteLine("_______________________");
             //ProblemFour();
+            //Console.WriteLine("_______________________");
             //ProblemFive();
+            //Console.WriteLine("_______________________");
             //ProblemSix();
+            //Console.WriteLine("_______________________");
             //ProblemSeven();
+            //Console.WriteLine("_______________________");
             //ProblemEight();
+            //Console.WriteLine("_______________________");
             //ProblemNine();
+            //Console.WriteLine("_______________________");
             //ProblemTen();
+            //Console.WriteLine("_______________________");
             //ProblemEleven();
+            //Console.WriteLine("_______________________");
             //ProblemTwelve();
+            //Console.WriteLine("_______________________");
             //ProblemThirteen();
+            //Console.WriteLine("_______________________");
             //ProblemFourteen();
+            //Console.WriteLine("_______________________");
             //ProblemFifteen();
+            //Console.WriteLine("_______________________");
             //ProblemSixteen();
+            //Console.WriteLine("_______________________");
             //ProblemSeventeen();
+            //Console.WriteLine("_______________________");
             //ProblemEighteen();
+            //Console.WriteLine("_______________________");
             //ProblemNineteen();
+            //Console.WriteLine("_______________________");
             //ProblemTwenty();
+            //Console.WriteLine("_______________________");
         }
 
         // <><><><><><><><> R Actions (Read) <><><><><><><><><>
@@ -63,6 +83,11 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that gets each product where the products price is greater than $150.
             // Then print the name and price of each product from the above query to the console.
+            var expensiveProducts = _context.Products.Where(p => p.Price > 150);
+            foreach (var product in expensiveProducts)
+            {
+                Console.WriteLine(product.Name + " costs " + product.Price);
+            }
 
         }
 
