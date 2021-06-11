@@ -327,6 +327,7 @@ namespace DatabaseFirstLINQ
 
                 string emailAddress;
                 string pw;
+                
                 Console.WriteLine("please enter your email address:");
                 emailAddress = Console.ReadLine();
                 Console.WriteLine("Please enter your Password:");
@@ -377,6 +378,44 @@ namespace DatabaseFirstLINQ
             // 3. If the user does not succesfully sing in
             // a. Display "Invalid Email or Password"
             // b. Re-prompt the user for credentials
+            bool token = false;
+            while (!token)
+            {
+
+                string emailAddress;
+                string pw;
+
+                Console.WriteLine("please enter your email address:");
+                emailAddress = Console.ReadLine();
+                Console.WriteLine("Please enter your Password:");
+                pw = Console.ReadLine();
+                try
+                {
+                    var user = _context.Users.Where(u => u.Email == emailAddress && u.Password == pw).SingleOrDefault();
+                    if (user == null)
+                    {
+                        Console.WriteLine("invalid email or password please try again");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Logged in");
+                        token = true;
+                        break;
+                    }
+
+
+
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("invalid email or password please try again");
+                }
+
+            }
+            
+
+
 
         }
 
