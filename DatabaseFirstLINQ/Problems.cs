@@ -55,9 +55,7 @@ namespace DatabaseFirstLINQ
             //Console.WriteLine("_______________________");
             //ProblemTwenty();
             //Console.WriteLine("_______________________");
-            //BonusOne();
-            //Console.WriteLine("_______________________");
-            BonusTwo();
+            BonusOne();
             Console.WriteLine("_______________________");
         }
 
@@ -357,6 +355,8 @@ namespace DatabaseFirstLINQ
                 }
 
             }
+            
+
         }
 
         private void BonusTwo()
@@ -366,12 +366,12 @@ namespace DatabaseFirstLINQ
 
             var users = _context.Users;
             int grandTotal = 0;
-            foreach(var user in users)
+            foreach (var user in users)
             {
                 var cart = _context.ShoppingCarts.Include(c => c.Product).Include(c => c.User).Where(u => u.User.Id == user.Id).Select(sc => sc.Product.Price * sc.Quantity).Sum();
                 int userTotal = (int)cart;
-                
-                grandTotal += userTotal; 
+
+                grandTotal += userTotal;
 
                 Console.WriteLine(user.Email + "'s shopping cart has $" + userTotal + " worth of items");
             }
@@ -382,22 +382,24 @@ namespace DatabaseFirstLINQ
         // BIG ONE
         private void BonusThree()
         {
-            // 1. Create functionality for a user to sign in via the console
+            // 1. Create functionality for a user to sign in via the console Check
             // 2. If the user succesfully signs in
             // a. Give them a menu where they perform the following actions within the console
             // View the products in their shopping cart
             // View all products in the Products table
             // Add a product to the shopping cart (incrementing quantity if that product is already in their shopping cart)
             // Remove a product from their shopping cart
-            // 3. If the user does not succesfully sing in
-            // a. Display "Invalid Email or Password"
-            // b. Re-prompt the user for credentials
+            // 3. If the user does not succesfully sing in Check
+            // a. Display "Invalid Email or Password" Check
+            // b. Re-prompt the user for credentials Check
             bool token = false;
+            string emailAddress = "";
+            string pw = "";
+
             while (!token)
             {
 
-                string emailAddress;
-                string pw;
+                
 
                 Console.WriteLine("please enter your email address:");
                 emailAddress = Console.ReadLine();
@@ -427,9 +429,66 @@ namespace DatabaseFirstLINQ
                 }
 
             }
-            
+            var authUser = _context.Users.Where(u => u.Email == emailAddress && u.Password == pw).SingleOrDefault();
+            // user signed in
+            userInterface(authUser.Id);
 
 
+
+
+
+        }
+
+        private void userInterface(int userId)
+        {
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("Please select from the following menu options:");
+                    Console.WriteLine("1. View your shopping cart");
+                    Console.WriteLine("2. View products for sale");
+                    Console.WriteLine("3. Log Out");
+
+                    int key = int.Parse(Console.ReadLine());
+                    if(key <1 || key > 3)
+                    {
+                        Console.WriteLine("Oops we need a number between 1 and 3");
+                    }
+                    else
+                    {
+                        if (key == 1)
+                        {
+                            shoppingMenu(userId);
+                            key = 0;
+                        }
+                        else if (key == 2)
+                        {
+                            productMenu(userId);
+                            key = 0;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Oops we need a number between 1 and 3");
+                }
+                
+
+            }
+
+        }
+
+        private void productMenu(int userId)
+        {
+
+        }
+        private void shoppingMenu(int userId)
+        {
 
         }
 
