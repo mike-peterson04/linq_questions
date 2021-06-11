@@ -389,117 +389,167 @@ namespace DatabaseFirstLINQ
         
 
         // BIG ONE
-        private void BonusThree()
-        {
-            // 1. Create functionality for a user to sign in via the console Check
-            // 2. If the user succesfully signs in
-            // a. Give them a menu where they perform the following actions within the console
-            // View the products in their shopping cart
-            // View all products in the Products table
-            // Add a product to the shopping cart (incrementing quantity if that product is already in their shopping cart)
-            // Remove a product from their shopping cart
-            // 3. If the user does not succesfully sing in Check
-            // a. Display "Invalid Email or Password" Check
-            // b. Re-prompt the user for credentials Check
-            bool token = false;
-            string emailAddress = "";
-            string pw = "";
+    //    private void BonusThree()
+    //    {
+    //        // 1. Create functionality for a user to sign in via the console Check
+    //        // 2. If the user succesfully signs in
+    //        // a. Give them a menu where they perform the following actions within the console
+    //        // View the products in their shopping cart
+    //        // View all products in the Products table
+    //        // Add a product to the shopping cart (incrementing quantity if that product is already in their shopping cart)
+    //        // Remove a product from their shopping cart
+    //        // 3. If the user does not succesfully sing in Check
+    //        // a. Display "Invalid Email or Password" Check
+    //        // b. Re-prompt the user for credentials Check
+    //        bool token = false;
+    //        string emailAddress = "";
+    //        string pw = "";
 
-            while (!token)
-            {
+    //        while (!token)
+    //        {
 
                 
 
-                Console.WriteLine("please enter your email address:");
-                emailAddress = Console.ReadLine();
-                Console.WriteLine("Please enter your Password:");
-                pw = Console.ReadLine();
-                try
-                {
-                    var user = _context.Users.Where(u => u.Email == emailAddress && u.Password == pw).SingleOrDefault();
-                    if (user == null)
-                    {
-                        Console.WriteLine("invalid email or password please try again");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Logged in");
-                        token = true;
-                        break;
-                    }
+    //            Console.WriteLine("please enter your email address:");
+    //            emailAddress = Console.ReadLine();
+    //            Console.WriteLine("Please enter your Password:");
+    //            pw = Console.ReadLine();
+    //            try
+    //            {
+    //                var user = _context.Users.Where(u => u.Email == emailAddress && u.Password == pw).SingleOrDefault();
+    //                if (user == null)
+    //                {
+    //                    Console.WriteLine("invalid email or password please try again");
+    //                }
+    //                else
+    //                {
+    //                    Console.WriteLine("Logged in");
+    //                    token = true;
+    //                    break;
+    //                }
 
 
 
 
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("invalid email or password please try again");
-                }
+    //            }
+    //            catch (Exception e)
+    //            {
+    //                Console.WriteLine("invalid email or password please try again");
+    //            }
 
-            }
-            var authUser = _context.Users.Where(u => u.Email == emailAddress && u.Password == pw).SingleOrDefault();
-            // user signed in
-            userInterface(authUser.Id);
-
-
+    //        }
+    //        var authUser = _context.Users.Where(u => u.Email == emailAddress && u.Password == pw).SingleOrDefault();
+    //        // user signed in
+    //        userInterface(authUser.Id);
 
 
 
-        }
 
-        private void userInterface(int userId)
-        {
-            while (true)
-            {
-                try
-                {
-                    Console.WriteLine("Please select from the following menu options:");
-                    Console.WriteLine("1. View your shopping cart");
-                    Console.WriteLine("2. View products for sale");
-                    Console.WriteLine("3. Log Out");
 
-                    int key = int.Parse(Console.ReadLine());
-                    if(key <1 || key > 3)
-                    {
-                        Console.WriteLine("Oops we need a number between 1 and 3");
-                    }
-                    else
-                    {
-                        if (key == 1)
-                        {
-                            shoppingMenu(userId);
-                            key = 0;
-                        }
-                        else if (key == 2)
-                        {
-                            productMenu(userId);
-                            key = 0;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                }
-                catch
-                {
-                    Console.WriteLine("Oops we need a number between 1 and 3");
-                }
+    //    }
+
+    //    private void userInterface(int userId)
+    //    {
+    //        while (true)
+    //        {
+    //            try
+    //            {
+    //                Console.WriteLine("Please select from the following menu options:");
+    //                Console.WriteLine("1. View your shopping cart");
+    //                Console.WriteLine("2. View products for sale");
+    //                Console.WriteLine("3. Log Out");
+
+    //                int key = int.Parse(Console.ReadLine());
+    //                if(key <1 || key > 3)
+    //                {
+    //                    Console.WriteLine("Oops we need a number between 1 and 3");
+    //                }
+    //                else
+    //                {
+    //                    if (key == 1)
+    //                    {
+    //                        shoppingMenu(userId);
+    //                        key = 0;
+    //                    }
+    //                    else if (key == 2)
+    //                    {
+    //                        productMenu(userId);
+    //                        key = 0;
+    //                    }
+    //                    else
+    //                    {
+    //                        break;
+    //                    }
+    //                }
+    //            }
+    //            catch
+    //            {
+    //                Console.WriteLine("Oops we need a number between 1 and 3");
+    //            }
                 
 
-            }
+    //        }
 
-        }
+    //    }
 
-        private void productMenu(int userId)
-        {
+    //    private void productMenu(int userId)
+    //    {
+    //        int count = 0;
+    //        int removeCheck = 0;
+    //        int escapeCheck = -1;
+    //        var cart = _context.ShoppingCarts.Include(c => c.Product).Where(c => c.UserId == userId);
+            
+    //        while (true)
+    //        {
+    //            foreach (var item in cart)
+    //            {
+    //                count++;
+    //                if (count == removeCheck)
+    //                {
 
-        }
-        private void shoppingMenu(int userId)
-        {
+    //                    if (item.Quantity-1 == 0) {
+    //                        _context.ShoppingCarts.Remove(item);
+    //                        _context
+    //                            }
+    //                    count = 0;
+    //                }
+    //                else if (escapeCheck == 0)
+    //                {
+    //                    break;
+    //                }
+    //                else
+    //                {
+    //                    Console.WriteLine("item Number "+count+"|"+item.quant + ": " + item.product + " in cart for $" + item.amount);
+    //                }
+    //            }
+    //            Console.WriteLine("______________________________");
+    //            Console.WriteLine("if you wish to remove an object from your cart please enter the item Number");
+    //            Console.WriteLine("or press 0 to return to the previous menu");
+    //            try
+    //            {
+    //                removeCheck = int.Parse(Console.ReadLine());
+    //                if(removeCheck == 0)
+    //                {
+    //                    escapeCheck = 0;
+    //                    break;
+    //                }
+    //                else if (removeCheck > count || removeCheck <0)
+    //                {
+    //                    Console.WriteLine("Whoops we need a number between 0 and "+count);
+    //                }
+                  
+    //            }
+    //            catch 
+    //            {
+    //                Console.WriteLine("Whoops we need a number between 0 and " + count);
+    //            }
+    //        }
 
-        }
+    //    }
+    //    private void shoppingMenu(int userId)
+    //    {
+
+    //    }
 
     }
 }
