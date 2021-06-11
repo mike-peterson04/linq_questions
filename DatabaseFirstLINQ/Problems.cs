@@ -55,8 +55,9 @@ namespace DatabaseFirstLINQ
             //Console.WriteLine("_______________________");
             //ProblemTwenty();
             //Console.WriteLine("_______________________");
-            BonusOne();
-            Console.WriteLine("_______________________");
+            //BonusOne();
+            //Console.WriteLine("_______________________");
+            BonusTwo();
         }
 
         // <><><><><><><><> R Actions (Read) <><><><><><><><><>
@@ -364,20 +365,28 @@ namespace DatabaseFirstLINQ
             // Write a query that finds the total of every users shopping cart products using LINQ.
             // Display the total of each users shopping cart as well as the total of the toals to the console.
 
-            var users = _context.Users;
+  
             int grandTotal = 0;
-            foreach (var user in users)
+
+            var cart = _context.ShoppingCarts.Include(c => c.Product)
+                .Select(c => new {UserId = c.UserId, Product = c.Product, Quantity = c.Quantity })
+                .GroupBy(c => c.UserId)
+                .Select(c => new { user = c.Key, total = c.Sum(sc => (sc.Product.Price * sc.Quantity)) });
+            foreach (var thing in cart)
             {
-                var cart = _context.ShoppingCarts.Include(c => c.Product).Include(c => c.User).Where(u => u.User.Id == user.Id).Select(sc => sc.Product.Price * sc.Quantity).Sum();
-                int userTotal = (int)cart;
-
-                grandTotal += userTotal;
-
-                Console.WriteLine(user.Email + "'s shopping cart has $" + userTotal + " worth of items");
+                Console.WriteLine("user# "+thing.user+" has $"+thing.total+"in their cart");
+                grandTotal += (int)thing.total;
             }
+            
+
+            
 
             Console.WriteLine("all carts have a value of " + grandTotal);
         }
+
+        
+
+        
 
         // BIG ONE
         private void BonusThree()
